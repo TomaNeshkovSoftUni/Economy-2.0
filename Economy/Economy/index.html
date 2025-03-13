@@ -9,22 +9,35 @@
         canvas { display: block; }
         #controls {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 5px;
+            display: flex;
+            gap: 10px;
+        }
+        select {
+            padding: 5px;
         }
     </style>
 </head>
 <body>
 
     <div id="controls">
-        <label for="finSelector">Select Rocket Fin:</label>
+        <label for="finSelector">Rocket Fin:</label>
         <select id="finSelector">
             <option value="classic">Classic</option>
             <option value="delta">Delta</option>
             <option value="curved">Curved</option>
+        </select>
+
+        <label for="sizeSelector">Size:</label>
+        <select id="sizeSelector">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
         </select>
     </div>
 
