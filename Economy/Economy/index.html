@@ -5,25 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Rocket Fin Selector</title>
     <style>
-        body { margin: 0; overflow: hidden; background: white; }
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background: rgb(0, 0, 0); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
         canvas { display: block; }
         #controls {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
+            position: relative;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 20px;
+            border-radius: 10px;
             display: flex;
-            gap: 10px;
+            gap: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            margin-top: 20px;
         }
         select {
-            padding: 5px;
+            padding: 8px;
+            font-size: 1em;
+        }
+        label {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+
+    <canvas id="rocketCanvas"></canvas>
 
     <div id="controls">
         <label for="finSelector">Rocket Fin:</label>
