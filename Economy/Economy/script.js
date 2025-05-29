@@ -8,15 +8,12 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(1, 1, 1).normalize();
 scene.add(light);
 
-let rocket, fins = [];
+let rocket, fins = [], engine;
 
 function createRocket(size) {
     if (rocket) scene.remove(rocket);
 
-    let scale;
-    if (size === "small") scale = 0.7;
-    else if (size === "large") scale = 1.3;
-    else scale = 1; // Medium (default)
+    let scale = getScaleFromSize(size);
 
     const geometry = new THREE.CylinderGeometry(1 * scale, 1 * scale, 5 * scale, 32);
     const material = new THREE.MeshStandardMaterial({ color: "red" });
@@ -24,6 +21,11 @@ function createRocket(size) {
     scene.add(rocket);
 
     updateFins(document.getElementById("finSelector").value, scale);
+    createEngine(document.getElementById("engineSelector").value, scale);
+}
+
+function getScaleFromSize(size) {
+    return size === "small" ? 0.7 : size === "large" ? 1.3 : 1;
 }
 
 function createFin(type, scale) {
@@ -31,28 +33,16 @@ function createFin(type, scale) {
     let vertices;
 
     if (type === "classic") {
-        vertices = new Float32Array([
-            -1, 0, 0,
-             1, 0, 0,
-             0, 1.5, -2
-        ]);
+        vertices = new Float32Array([-1, 0, 0, 1, 0, 0, 0, 1.5, -2]);
     } else if (type === "delta") {
-        vertices = new Float32Array([
-            -1, 0, 0,
-             1, 0, 0,
-             2, 2, -3
-        ]);
+        vertices = new Float32Array([-1, 0, 0, 1, 0, 0, 2, 2, -3]);
     } else if (type === "curved") {
-        vertices = new Float32Array([
-            -1, 0, 0,
-             1, 0, 0,
-             0, 2, -2
-        ]);
+        vertices = new Float32Array([-1, 0, 0, 1, 0, 0, 0, 2, -2]);
     }
 
     geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
     geometry.computeVertexNormals();
-    
+
     const material = new THREE.MeshStandardMaterial({ color: "blue", side: THREE.DoubleSide });
     const fin = new THREE.Mesh(geometry, material);
 
@@ -73,6 +63,28 @@ function updateFins(type, scale = 1) {
     }
 }
 
+function createEngine(type, scale) {
+    if (engine) scene.remove(engine);
+
+    let geometry;
+    const material = new THREE.MeshStandardMaterial({ color: "gray" });
+
+    if (type === "basic") {
+        geometry = new THREE.CylinderGeometry(0.5 * scale, 0.3 * scale, 1 * scale, 16);
+    } else if (type === "boost") {
+        geometry = new THREE.CylinderGeometry(0.7 * scale, 0.3 * scale, 1.2 * scale, 16);
+    } else if (type === "ion") {
+        geometry = new THREE.TorusGeometry(0.4 * scale, 0.1 * scale, 16, 100);
+    }
+
+    engine = new THREE.Mesh(geometry, material);
+    engine.position.y = -3 * scale;
+
+    if (type === "ion") engine.rotation.x = Math.PI / 2;
+
+    scene.add(engine);
+}
+
 document.getElementById("finSelector").addEventListener("change", function () {
     updateFins(this.value, getCurrentScale());
 });
@@ -81,9 +93,12 @@ document.getElementById("sizeSelector").addEventListener("change", function () {
     createRocket(this.value);
 });
 
+document.getElementById("engineSelector").addEventListener("change", function () {
+    createEngine(this.value, getCurrentScale());
+});
+
 function getCurrentScale() {
-    const size = document.getElementById("sizeSelector").value;
-    return size === "small" ? 0.7 : size === "large" ? 1.3 : 1;
+    return getScaleFromSize(document.getElementById("sizeSelector").value);
 }
 
 camera.position.z = 8;

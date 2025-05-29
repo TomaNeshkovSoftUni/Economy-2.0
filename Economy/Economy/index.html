@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Rocket Fin Selector</title>
-    <style>
-        body { 
-            margin: 0; 
-            overflow: hidden; 
-            background: rgb(0, 0, 0); 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        canvas { display: block; }
-        #controls {
-            position: relative;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px 20px;
-            border-radius: 10px;
-            display: flex;
-            gap: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-        select {
-            padding: 10px;
-            font-size: 1em;
-        }
-        label {
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Rocket Fin Selector</title>
+  <style>
+    body { 
+      margin: 0; 
+      overflow: hidden; 
+      background: rgb(0, 0, 0); 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    canvas { display: block; }
+    #controls {
+      position: relative;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px 20px;
+      border-radius: 10px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    select {
+      padding: 10px;
+      font-size: 1em;
+    }
+    label {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-    <canvas id="rocketCanvas"></canvas>
+  <canvas id="rocketCanvas"></canvas>
 
-    <div id="controls">
-        <label for="finSelector">Rocket Fin:</label>
-        <select id="finSelector">
-            <option value="classic">Classic</option>
-            <option value="delta">Delta</option>
-            <option value="curved">Curved</option>
-        </select>
+  <div id="controls">
+    <label for="finSelector">Rocket Fin:</label>
+    <select id="finSelector">
+      <option value="classic">Classic</option>
+      <option value="delta">Delta</option>
+      <option value="curved">Curved</option>
+    </select>
 
-        <label for="sizeSelector">Size:</label>
-        <select id="sizeSelector">
-            <option value="small">Small</option>
-            <option value="medium" selected>Medium</option>
-            <option value="large">Large</option>
-        </select>
-    </div>
+    <label for="sizeSelector">Size:</label>
+    <select id="sizeSelector">
+      <option value="small">Small</option>
+      <option value="medium" selected>Medium</option>
+      <option value="large">Large</option>
+    </select>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+    <label for="engineSelector">Engine:</label>
+    <select id="engineSelector">
+      <option value="basic">Basic</option>
+      <option value="boost">Boost</option>
+      <option value="ion">Ion</option>
+    </select>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
